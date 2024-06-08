@@ -1,5 +1,11 @@
 # pam-keycloak-oidc
 
+## Fork version 1.1.7
+This version has been forked from the [zhaow-de](https://github.com/zhaow-de/pam-keycloak-oidc). 
+
+Updates:
+- Version and package change for [JWT library](https://github.com/dgrijalva/jwt-go-v3.2.0+incompatible)
+
 **Current version: 1.1.6**
 
 PAM module connecting to [Keycloak](https://www.keycloak.org/) for user authentication using OpenID Connect protocol,
