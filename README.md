@@ -25,7 +25,7 @@ eg `server-pam-auth`. All that's needed is a name. You can add users to the grou
 - Name: e.g. `pam_roles`
 - Protocol: `OpenID Connect`
 - Display on consent screen: `Off`
-- Include in token scope: `Off`
+- Include in token scope: `On`
 - Save
 - #### Mappers:
   - Click Configure a new mapper
@@ -34,9 +34,10 @@ eg `server-pam-auth`. All that's needed is a name. You can add users to the grou
   - Multivalued: `On`
   - Token Claim Name: `pam_roles` _(The name of the client scope defined in step 3)_
   - Claim JSON Type: `String`
-  - Add to ID token: `On`
+  - Add to ID token: `Off`
   - Add to access token: `On`
   - Add to userinfo: `Off`
+  - Add to token introspection: `Off`
   - Save
 - #### Scope
   - Click Assign role
@@ -53,14 +54,14 @@ eg `server-pam-auth`. All that's needed is a name. You can add users to the grou
 - #### Capability config
     - Client authentication: `On`
     - Authorization: `Off`
-- ##### Authentication Flow:
-    - Standard flow: `On`
-    - Implicit flow: `Off`
-    - OAuth 2.0 Device Authorization Grant: `On`
-    - OIDC CIBA Grant: `Off`
-    - Direct access grants: `On`
-    - Service accounts roles: `Off`
-    - Click Next
+    - ##### Authentication Flow:
+        - Standard flow: `On`
+        - Implicit flow: `Off`
+        - OAuth 2.0 Device Authorization Grant: `Off`
+        - OIDC CIBA Grant: `Off`
+        - Direct access grants: `On`
+        - Service accounts roles: `Off`
+        - Click Next
 - #### Login settings
     - Root URL: ` `
     - Home URL: ` `
@@ -77,15 +78,16 @@ eg `server-pam-auth`. All that's needed is a name. You can add users to the grou
 - #### Go to _core-pam-dedicated_
     - Click Scope
     - Full scope allowed: `Off`
-- ##### Click Assign role
-    - Check the role we created earlier, e.g. `server-pam-auth`
-    - Click Assign
+    - ##### Click Assign role
+        - Check the role we created earlier, e.g. `server-pam-auth`
+        - Click Assign
 
 ### 8. Go to Client Details (Clients > Client, e.g. `server-pam`)
 
 - Click Advanced
 - #### Fine grain OpenID Connect configuration
     - Access token signature algorithm: `RS256`
+    - Save
 
 ### 9. Assign the role
 
