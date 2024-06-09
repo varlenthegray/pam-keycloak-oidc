@@ -27,25 +27,21 @@ eg `server-pam-auth`. All that's needed is a name. You can add users to the grou
 - Display on consent screen: `Off`
 - Include in token scope: `Off`
 - Save
-
-### 4. Go to Mappers:
-
-- Click Configure a new mapper
-- Click User Realm Role
-- Name: e.g. `pam roles`
-- Multivalued: `On`
-- Token Claim Name: `pam_roles` _(The name of the client scope defined in step 3)_
-- Claim JSON Type: `String`
-- Add to ID token: `On`
-- Add to access token: `On`
-- Add to userinfo: `Off`
-- Save
-
-### 5. Go to Scope
-
-- Click Assign role
-- Check the role created previously, e.g. `server-pam-auth`
-- Click Assign
+- #### Mappers:
+  - Click Configure a new mapper
+  - Click User Realm Role
+  - Name: e.g. `pam roles`
+  - Multivalued: `On`
+  - Token Claim Name: `pam_roles` _(The name of the client scope defined in step 3)_
+  - Claim JSON Type: `String`
+  - Add to ID token: `On`
+  - Add to access token: `On`
+  - Add to userinfo: `Off`
+  - Save
+- #### Scope
+  - Click Assign role
+  - Check the role created previously, e.g. `server-pam-auth`
+  - Click Assign
 
 ### 6. Go to Clients
 
