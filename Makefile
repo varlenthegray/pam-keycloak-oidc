@@ -28,6 +28,15 @@ build_all: ## Build the binary for all architectures
 			$(shell GOOS=$(GOOS); GOARCH=$(GOARCH); [[ $(GOOS) == "windows" ]] && EXT=".exe"; go build -v -o $(BINARY).$(GOOS)-$(GOARCH)$${EXT})))
 	$(info All compiled!)
 
+.PHONY: package
+package: ## Create both a tar.gz and a .zip file excluding the files listed in the .gitignore and .tar.gz files respectively
+	mkdir -p ./tmp
+	git ls-files -co --exclude-standard > files.txt
+	rm -f ./tmp/*
+	while IFS= read -r file; do if [ -e "$$file" ]; then tar -czvf ./tmp/source_code.tar.gz "$$file"; fi; done < files.txt
+	while IFS= read -r file; do if [ -e "$$file" ]; then zip -r ./tmp/source_code.zip "$$file"; fi; done < files.txt
+	rm files.txt
+
 # Remove only what we've created
 clean:
 	@find ${ROOT_DIR} -name '${BINARY}[.?][a-zA-Z0-9]*[-?][a-zA-Z0-9]*' -delete
