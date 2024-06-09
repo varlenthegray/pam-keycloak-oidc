@@ -2,15 +2,15 @@ SHELL := /bin/bash
 # Check for required command tools to build or stop immediately
 EXECUTABLES = git go find pwd
 K := $(foreach exec,$(EXECUTABLES),\
-        $(if $(shell which $(exec)),some string,$(error "No $(exec) in PATH)))
+        $(if $(shell which $(exec)),some string,$(error "No $(exec) in PATH")))
 
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 BINARY=pam-keycloak-oidc
-VERSION=1.1.6
+VERSION=1.1.7
 BUILD=`git rev-parse HEAD`
 PLATFORMS=darwin linux windows
-ARCHITECTURES=amd64
+ARCHITECTURES=amd64 arm64
 
 # Setup linker flags option for build that inter-operate with variable names in src code
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD}"
@@ -24,8 +24,8 @@ build: ## Build the binary for the local architecture
 .PHONY: build_all
 build_all: ## Build the binary for all architectures
 	$(foreach GOOS, $(PLATFORMS),\
-	$(foreach GOARCH, $(ARCHITECTURES),\
-	$(shell export GOOS=$(GOOS); export GOARCH=$(GOARCH); [[ $(GOOS) == "windows" ]] && export EXT=".exe"; go build -v -o $(BINARY).$(GOOS)-$(GOARCH)$${EXT})))
+		$(foreach GOARCH, $(ARCHITECTURES),\
+			$(shell GOOS=$(GOOS); GOARCH=$(GOARCH); [[ $(GOOS) == "windows" ]] && EXT=".exe"; go build -v -o $(BINARY).$(GOOS)-$(GOARCH)$${EXT})))
 	$(info All compiled!)
 
 # Remove only what we've created
